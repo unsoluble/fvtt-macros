@@ -1,3 +1,7 @@
+// For all currently selected tokens, changes their actor sheet to LootSheetNPC,
+// deletes all Feat items, sets token Observer privs for players, and adds a treasure
+// overlay icon to the body. Asks for confirmation because of the deletions.
+
 let d = new Dialog({
 title: 'Convert to lootable body',
 content: `Sure?`,
