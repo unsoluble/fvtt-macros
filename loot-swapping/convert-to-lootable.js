@@ -20,16 +20,40 @@ buttons: {
 },
 default: 'no',
 }).render(true);
-
+  
 async function main() {
     for (let token of canvas.tokens.controlled) {
+        let newItems = token.actor.data.items
+        .filter(item => {
+            if (item.type == 'weapon') {
+                return item.data.weaponType != 'natural';
+            }
+            if (item.type == 'equipment') {
+                if (!item.data.armor)
+                    return true;
+                return item.data.armor.type != 'natural';
+            }
+            return !(['class', 'spell', 'feat']
+            .includes(item.type));
+        });
+        
+        let newCurrencyData = {};
+        
+        if (typeof(token.actor.data.data.currency.cp) === "number") {
+            newCurrencyData['data.currency'] = {
+                'cp': {'value': token.actor.data.data.currency.cp},
+                'ep': {'value': token.actor.data.data.currency.ep},
+                'gp': {'value': token.actor.data.data.currency.gp},
+                'pp': {'value': token.actor.data.data.currency.pp},
+                'sp': {'value': token.actor.data.data.currency.sp}
+            };
+        }
+        await token.actor.update(newCurrencyData);
         await token.actor.setFlag("core", "sheetClass", "dnd5e.LootSheet5eNPC");
         await token.update({
             'actorData.permission.default': ENTITY_PERMISSIONS.OBSERVER,
             overlayEffect : `icons/svg/chest.svg`
         });
-        const feats = token.actor.items.filter(i => i.type === "feat");
-        const deletions = feats.map(i => i._id);
-        await token.actor.deleteEmbeddedEntity("OwnedItem", deletions);
+        await token.actor.update( {"items": newItems} );
     }
 }
