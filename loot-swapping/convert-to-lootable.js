@@ -37,8 +37,12 @@ async function main() {
             .includes(item.type));
         });
         
-        let newCurrencyData = {};
+        // This section is a workaround for the fact that the LootSheetNPC module
+        // currently uses an older currency schema, compared to current 5e expectations.
+        // Need to convert the actor's currency data to the LS schema here to avoid
+        // breakage. If there is already currency on the actor, it is retained.
         
+        let newCurrencyData = {};
         if (typeof(token.actor.data.data.currency.cp) === "number") {
             newCurrencyData['data.currency'] = {
                 'cp': {'value': token.actor.data.data.currency.cp},
@@ -49,6 +53,7 @@ async function main() {
             };
         }
         await token.actor.update(newCurrencyData);
+        
         await token.actor.setFlag("core", "sheetClass", "dnd5e.LootSheet5eNPC");
         await token.update({
             'actorData.permission.default': ENTITY_PERMISSIONS.OBSERVER,
