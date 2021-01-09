@@ -42,8 +42,9 @@ async function main() {
         // Need to convert the actor's currency data to the LS schema here to avoid
         // breakage. If there is already currency on the actor, it is retained.
         
-        let newCurrencyData = {};
+        
         if (typeof(token.actor.data.data.currency.cp) === "number") {
+            let newCurrencyData = {};
             newCurrencyData['data.currency'] = {
                 'cp': {'value': token.actor.data.data.currency.cp},
                 'ep': {'value': token.actor.data.data.currency.ep},
@@ -51,8 +52,8 @@ async function main() {
                 'pp': {'value': token.actor.data.data.currency.pp},
                 'sp': {'value': token.actor.data.data.currency.sp}
             };
+            await token.actor.update(newCurrencyData);
         }
-        await token.actor.update(newCurrencyData);
         
         await token.actor.setFlag("core", "sheetClass", "dnd5e.LootSheet5eNPC");
         await token.actor.setFlag("lootsheetnpc5e", "lootsheettype", "Loot");
