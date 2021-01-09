@@ -55,6 +55,7 @@ async function main() {
         await token.actor.update(newCurrencyData);
         
         await token.actor.setFlag("core", "sheetClass", "dnd5e.LootSheet5eNPC");
+        await token.actor.setFlag("lootsheetnpc5e", "lootsheettype", "Loot");
         await token.update({
             'actorData.permission.default': ENTITY_PERMISSIONS.OBSERVER,
             overlayEffect : `icons/svg/chest.svg`
