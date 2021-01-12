@@ -107,25 +107,23 @@ async function ConvertToLootable(){
     await token.actor.update(newActorData);
 
     // Update permissions to level 2, so players can loot
-    if (lootingUsers.length > 0) {
-      let permissions = {};
-      Object.assign(permissions, token.actor.data.permission);
-      lootingUsers.forEach(user => {
-        permissions[user.data._id] = 2;
-      });
-      await token.update({
-        "overlayEffect" : 'icons/svg/chest.svg',
-        "actorData": {
-          "actor": {
-            "flags": {
-              "loot": {
-                "playersPermission": 2
-              }
+    let permissions = {};
+    Object.assign(permissions, token.actor.data.permission);
+    lootingUsers.forEach(user => {
+      permissions[user.data._id] = 2;
+    });
+    await token.update({
+      "overlayEffect" : 'icons/svg/chest.svg',
+      "actorData": {
+        "actor": {
+          "flags": {
+            "loot": {
+              "playersPermission": 2
             }
-          },
-          "permission": permissions
-        }
-      });
-    }
+          }
+        },
+        "permission": permissions
+      }
+    });
   }
 }
