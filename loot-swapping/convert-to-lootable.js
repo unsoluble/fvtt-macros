@@ -112,6 +112,13 @@ async function ConvertToLootable(){
     lootingUsers.forEach(user => {
       permissions[user.data._id] = 2;
     });
+    
+    // If using Combat Utility Belt, need to remove any of its condition overlays
+    // before we can add the chest icon overlay.
+    if (game.modules.get("combat-utility-belt")?.active) {
+      await game.cub.removeAllConditions(token);
+    }
+        
     await token.update({
       "overlayEffect" : 'icons/svg/chest.svg',
       "actorData": {
