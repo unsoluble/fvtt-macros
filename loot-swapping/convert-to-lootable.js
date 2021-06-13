@@ -99,7 +99,7 @@ async function ConvertToLootable(){
       // Ensure it can divide evenly across all looting players
       gold = gold + (gold % Math.max(lootingUsers.length, 1)) ?? 0;
 
-      newActorData['data.currency'].gp.value = gold;
+      newActorData['data.currency.gp.value'] = gold;
     }
     
     */
