@@ -1,3 +1,7 @@
+// NOTE: This macro won't work under 0.8.x. I might get around to tweaking it, but honestly
+// at this point just grab @honeybadger's, which is basically the same thing but better in a
+// few ways: https://github.com/trioderegion/fvtt-macros/blob/master/honeybadger-macros/actors/ConvertToLootSheet.js
+
 // For all currently selected tokens, changes their actor sheet to LootSheetNPC,
 // deletes all non-lootable items, sets token Observer privs for players, and adds a treasure
 // overlay icon to the body. Asks for confirmation because of the deletions.
