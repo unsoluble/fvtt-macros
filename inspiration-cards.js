@@ -1,8 +1,8 @@
-const table = game.tables.getName('Inspiration Deck');
-const packName = 'SharedCompendiums.inspiration-cards';
+const deckTable = game.tables.getName('Inspiration Deck');
+const packName = 'shared-compendiums.inspiration-cards';
 const actors = ['Barnabus Truesheel', 'Lachish', 'Natriel Adonai', 'Owlgar', 'Phingo Underfoot'];
 
-const DistributeItems = false;
+const DistributeItems = true;
 const DeleteExisting = false;
 
 // Open the div, set the BG styles.
@@ -52,15 +52,15 @@ let rolls = [];
 async function doDraw(actor) {
   let roll = '';
   do {
-    roll = new Roll(table.data.formula).roll();
+    roll = new Roll(deckTable.data.formula).roll();
   } while (rolls.includes(roll.total));
 
   rolls.push(roll.total);
-  const result = table._getResultsForRoll(roll.total)[0];
+  const result = deckTable.getResultsForRoll(roll.total)[0];
 
   const destinationActor = game.actors.getName(actor);
 
-  let item = await searchItem({ key: packName, name: result.text });
+  let item = await searchItem({ key: packName, name: result.data.text });
   let entity = await findItemInCompendium({ keys: packName, name: item.name, id: item._id });
 
   messageBody +=
@@ -74,7 +74,7 @@ async function doDraw(actor) {
       class='entity-link'
       data-id='` +
     item._id +
-    `'data-pack='SharedCompendiums.inspiration-cards'
+    `'data-pack='shared-compendiums.inspiration-cards'
       style='
       border: none;
       background: none;'>
@@ -86,7 +86,7 @@ async function doDraw(actor) {
     buildImageURL(item.name) +
     '></a><br>';
 
-  if (DistributeItems) await destinationActor.createOwnedItem(entity);
+  if (DistributeItems) await destinationActor.createEmbeddedDocuments(entity);
 }
 
 // These search and find functions I'm sure could be consolidated/simplified,
@@ -112,7 +112,7 @@ async function findItemInCompendium({ keys = [], name = '', id = '' }) {
   for (let key of keys) {
     let pack = game.packs.get(key);
     let itemID = id ?? (await pack.getIndex()).find((i) => i.name === name)?._id;
-    if (itemID) return await pack.getEntity(itemID);
+    if (itemID) return await pack.getDocument(itemID);
   }
 }
 
