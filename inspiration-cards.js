@@ -31,10 +31,15 @@ let rolls = [];
           return true;
         }
       });
-      for (let i of existingCards) {
-        await game.actors.getName(actor).deleteOwnedItem(i.id);
-        console.log('Deleted ' + i.name + ' from ' + actor);
-      }
+        
+      //collect IDs to output (and echo what we are deleting)
+      const deleteIds = existingCards.map( (card) => {
+          console.log(`Deleting ${card.name} from ${actor}`);
+          return card.id;
+      });
+        
+      //delete these inspiration card IDs
+      await game.actors.getName(actor).deleteEmbeddedDocuments("Item",deleteIds);
     }
   }
 
@@ -52,7 +57,8 @@ let rolls = [];
 async function doDraw(actor) {
   let roll = '';
   do {
-    roll = new Roll(deckTable.data.formula).roll();
+    //future proof against 0.9 async rolls
+    roll = await(new Roll(deckTable.data.formula).evaluate({async:true}));
   } while (rolls.includes(roll.total));
 
   rolls.push(roll.total);
@@ -86,7 +92,7 @@ async function doDraw(actor) {
     buildImageURL(item.name) +
     '></a><br>';
 
-  if (DistributeItems) await destinationActor.createEmbeddedDocuments(entity);
+  if (DistributeItems) await destinationActor.createEmbeddedDocuments("Item", [entity]);
 }
 
 // These search and find functions I'm sure could be consolidated/simplified,
