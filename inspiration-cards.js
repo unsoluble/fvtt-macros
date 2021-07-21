@@ -3,7 +3,7 @@ const packName = 'shared-compendiums.inspiration-cards';
 const actors = ['Barnabus Truesheel', 'Lachish', 'Natriel Adonai', 'Owlgar', 'Phingo Underfoot'];
 
 const DistributeItems = true;
-const DeleteExisting = false;
+const DeleteExisting = true;
 
 // Open the div, set the BG styles.
 let messageBody = `<div style='
@@ -22,8 +22,6 @@ let rolls = [];
 
 (async () => {
   for (const actor of actors) {
-    // Draw a card for each actor.
-    await doDraw(actor);
     // If desired, delete any existing inspiration cards from the actors.
     if (DeleteExisting === true) {
       let existingCards = game.actors.getName(actor).items.filter((item) => {
@@ -39,7 +37,10 @@ let rolls = [];
       });
         
       //delete these inspiration card IDs
-      await game.actors.getName(actor).deleteEmbeddedDocuments("Item",deleteIds);
+      await game.actors.getName(actor).deleteEmbeddedDocuments("Item", deleteIds);
+      
+      // Draw a card for each actor.
+      await doDraw(actor);
     }
   }
 
@@ -80,8 +81,9 @@ async function doDraw(actor) {
       class='entity-link'
       data-id='` +
     item._id +
-    `'data-pack='shared-compendiums.inspiration-cards'
-      style='
+    `' data-pack='` + 
+    packName +
+    `' style='
       border: none;
       background: none;'>
       <img style='
@@ -92,7 +94,7 @@ async function doDraw(actor) {
     buildImageURL(item.name) +
     '></a><br>';
 
-  if (DistributeItems) await destinationActor.createEmbeddedDocuments("Item", [entity]);
+  if (DistributeItems) await destinationActor.createEmbeddedDocuments("Item", [entity.data]);
 }
 
 // These search and find functions I'm sure could be consolidated/simplified,
