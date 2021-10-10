@@ -2,7 +2,8 @@
 // deletes all non-lootable items, sets token Observer privs for players, and adds a treasure
 // overlay icon to the body. Asks for confirmation because of the deletions.
 //
-// Built with help from a ton of people, notably: @Akaito, @honeybadger, @kekilla, and @cole
+// Original script by tas (ygg#0922) -- thanks tas!
+// Evolved with help from a ton of people, notably: @Akaito, @honeybadger, @kekilla, and @cole
 
 let d = new Dialog({
   title: 'Convert to lootable body',
