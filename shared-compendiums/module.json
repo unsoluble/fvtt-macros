@@ -1,0 +1,60 @@
+{   
+   "name": "SharedCompendiums",   
+   "title": "Shared Compendiums",   
+   "description": "Personal compendium-sharing module.",   
+   "author": "me",
+   "version": "1.0.0",
+   "minimumCoreVersion": "0.5.5",
+   "compatibleCoreVersion": "3.0.0",
+   "packs": [
+    {
+      "name": "scenes",
+      "label": "Shared Scenes",
+      "path": "packs/scenes.db",
+      "entity": "Scene",
+      "module": "SharedCompendiums"
+    },
+    {
+      "name": "actors",
+      "label": "Shared Actors",
+      "path": "packs/actors.db",
+      "entity": "Actor",
+      "module": "SharedCompendiums"
+    },
+    {
+      "name": "items",
+      "label": "Shared Items",
+      "path": "packs/items.db",
+      "entity": "Item",
+      "module": "SharedCompendiums"
+    },
+    {
+      "name": "journalentries",
+      "label": "Shared Journal Entries",
+      "path": "packs/journalentries.db",
+      "entity": "JournalEntry",
+      "module": "SharedCompendiums"
+    },
+    {
+      "name": "rolltables",
+      "label": "Shared Roll Tables",
+      "path": "packs/rolltables.db",
+      "entity": "RollTable",
+      "module": "SharedCompendiums"
+    },
+    {
+      "name": "playlists",
+      "label": "Shared Playlists",
+      "path": "packs/playlists.db",
+      "entity": "Playlist",
+      "module": "SharedCompendiums"
+    },
+    {
+      "name": "macros",
+      "label": "Shared Macros",
+      "path": "packs/macros.db",
+      "entity": "Macro",
+      "module": "SharedCompendiums"
+    }
+  ]
+ }
