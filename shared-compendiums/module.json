@@ -1,60 +1,75 @@
-{   
-   "name": "SharedCompendiums",   
-   "title": "Shared Compendiums",   
-   "description": "Personal compendium-sharing module.",   
-   "author": "me",
-   "version": "1.0.0",
-   "minimumCoreVersion": "0.5.5",
-   "compatibleCoreVersion": "3.0.0",
-   "packs": [
+{
+  "name": "shared-compendiums",
+  "title": "Shared Compendiums",
+  "description": "Personal compendium-sharing module.",
+  "author": "me",
+  "version": "1.0.0",
+  "minimumCoreVersion": "0.5.5",
+  "compatibleCoreVersion": "9",
+  "packs": [
     {
       "name": "scenes",
       "label": "Shared Scenes",
       "path": "packs/scenes.db",
       "entity": "Scene",
-      "module": "SharedCompendiums"
+      "type": "Scene",
+      "module": "shared-compendiums"
     },
     {
       "name": "actors",
       "label": "Shared Actors",
       "path": "packs/actors.db",
       "entity": "Actor",
-      "module": "SharedCompendiums"
+      "type": "Actor",
+      "module": "shared-compendiums"
     },
     {
       "name": "items",
       "label": "Shared Items",
       "path": "packs/items.db",
       "entity": "Item",
-      "module": "SharedCompendiums"
+      "type": "Item",
+      "module": "shared-compendiums"
     },
     {
       "name": "journalentries",
       "label": "Shared Journal Entries",
       "path": "packs/journalentries.db",
       "entity": "JournalEntry",
-      "module": "SharedCompendiums"
+      "type": "JournalEntry",
+      "module": "shared-compendiums"
     },
     {
       "name": "rolltables",
       "label": "Shared Roll Tables",
       "path": "packs/rolltables.db",
       "entity": "RollTable",
-      "module": "SharedCompendiums"
+      "type": "RollTable",
+      "module": "shared-compendiums"
     },
     {
       "name": "playlists",
       "label": "Shared Playlists",
       "path": "packs/playlists.db",
       "entity": "Playlist",
-      "module": "SharedCompendiums"
+      "type": "Playlist",
+      "module": "shared-compendiums"
     },
     {
       "name": "macros",
       "label": "Shared Macros",
       "path": "packs/macros.db",
       "entity": "Macro",
-      "module": "SharedCompendiums"
+      "type": "Macro",
+      "module": "shared-compendiums"
+    },
+    {
+      "name": "cards",
+      "label": "Shared Cards",
+      "path": "packs/cards.db",
+      "entity": "Cards",
+      "type": "Cards",
+      "module": "shared-compendiums"
     }
   ]
- }
+}
