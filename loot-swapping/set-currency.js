@@ -20,7 +20,7 @@ new Dialog({
 		cancel: { label: "Cancel", icon: '<i class="fas fa-times"></i>' },
 		submit: {
 			label: "Submit", icon: '<i class="fas fa-save"></i>',
-			callback: html => {
+			callback: async html => {
 				const actors = canvas.tokens.controlled.map(x => x.actor);
 				if (actors.length == 0) { ui.notifications.info("No tokens selected"); return; }
 				const roll = x => x.length > 0 ? Roll.create(x) : Roll.create('0');
@@ -32,25 +32,25 @@ new Dialog({
 					cp: roll(html.find('input[name="cp"]').val())
 				};
 				const op = html.find('select').val();
-				actors.forEach(x => {
-					const currency = duplicate(x.data.data.currency);
+				for(const actor of actors) {
+					const currency = duplicate(actor.data.data.currency);
 					var current = 0;
-					var roll = 0;
+					var rollTotal = 0;
 					var result = 0;
 					for (let key of Object.keys(currency)) {
 						current = currency[key].value !== undefined ? parseInt(currency[key].value) : parseInt(currency[key]);
-						roll = curr[key].reroll().total;
+						rollTotal = (await curr[key].reroll({async:true})).total;
 						if (isNaN(current)) current = 0;
-            if(op === 'rep') result = roll;
-            else if(op === 'add') result = current + roll;
-            else if(op === 'sub') result = current - roll;
-            else if(op === 'mul') result = current * roll;
-            else if(op === 'div') result = current / roll;
-						if (currency[key].value === undefined) currency[key] = result.toString();
-						else currency[key].value = result;
+						if(op === 'rep') result = rollTotal;
+						else if(op === 'add') result = current + rollTotal;
+						else if(op === 'sub') result = current - rollTotal;
+						else if(op === 'mul') result = current * rollTotal;
+						else if(op === 'div') result = current / rollTotal;
+						if (currency[key] === undefined) currency[key] = result.toString();
+						else currency[key] = result;
 					}
-					x.update({ data: { currency } });
-				});
+					await actor.update({ data: { currency } });
+				}
 			}
 		}
 	}, default: "submit"
