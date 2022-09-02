@@ -1,23 +1,17 @@
 {
-  "id": "shared-compendiums",
+  "name": "shared-compendiums",
   "title": "Shared Compendiums",
   "description": "Personal compendium-sharing module.",
-  "authors": [
-    {
-      "name": "Me"
-    }
-  ],
+  "author": "me",
   "version": "1.0.0",
-  "compatibility": {
-    "minimum": 10,
-    "verified": 10,
-    "maximum": 10
-  },
+  "minimumCoreVersion": "0.5.5",
+  "compatibleCoreVersion": "9",
   "packs": [
     {
       "name": "scenes",
       "label": "Shared Scenes",
       "path": "packs/scenes.db",
+      "entity": "Scene",
       "type": "Scene",
       "module": "shared-compendiums"
     },
@@ -25,22 +19,23 @@
       "name": "actors",
       "label": "Shared Actors",
       "path": "packs/actors.db",
+      "entity": "Actor",
       "type": "Actor",
-      "module": "shared-compendiums",
-      "system": "dnd5e"
+      "module": "shared-compendiums"
     },
     {
       "name": "items",
       "label": "Shared Items",
       "path": "packs/items.db",
+      "entity": "Item",
       "type": "Item",
-      "module": "shared-compendiums",
-      "system": "dnd5e"
+      "module": "shared-compendiums"
     },
     {
       "name": "journalentries",
       "label": "Shared Journal Entries",
       "path": "packs/journalentries.db",
+      "entity": "JournalEntry",
       "type": "JournalEntry",
       "module": "shared-compendiums"
     },
@@ -48,6 +43,7 @@
       "name": "rolltables",
       "label": "Shared Roll Tables",
       "path": "packs/rolltables.db",
+      "entity": "RollTable",
       "type": "RollTable",
       "module": "shared-compendiums"
     },
@@ -55,6 +51,7 @@
       "name": "playlists",
       "label": "Shared Playlists",
       "path": "packs/playlists.db",
+      "entity": "Playlist",
       "type": "Playlist",
       "module": "shared-compendiums"
     },
@@ -62,6 +59,7 @@
       "name": "macros",
       "label": "Shared Macros",
       "path": "packs/macros.db",
+      "entity": "Macro",
       "type": "Macro",
       "module": "shared-compendiums"
     },
@@ -69,16 +67,9 @@
       "name": "cards",
       "label": "Shared Cards",
       "path": "packs/cards.db",
+      "entity": "Cards",
       "type": "Cards",
       "module": "shared-compendiums"
-    },
-    {
-      "name": "adventures",
-      "label": "Shared Adventures",
-      "path": "packs/adventures.db",
-      "type": "Adventure",
-      "module": "shared-compendiums",
-      "system": "dnd5e"
     }
   ]
 }
